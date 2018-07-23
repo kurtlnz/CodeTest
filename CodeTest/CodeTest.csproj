@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -146,9 +152,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807220231417_InitialModel.cs" />
+    <Compile Include="Migrations\201807220231417_InitialModel.Designer.cs">
+      <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\DbContextModel.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-cerulean.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -171,6 +188,16 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tablesorter\jquery.metadata.js" />
+    <Content Include="Scripts\tablesorter\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\tablesorter\themes\blue\asc.gif" />
+    <Content Include="Scripts\tablesorter\themes\blue\bg.gif" />
+    <Content Include="Scripts\tablesorter\themes\blue\desc.gif" />
+    <Content Include="Scripts\tablesorter\themes\blue\style.css" />
+    <Content Include="Scripts\tablesorter\themes\green\asc.png" />
+    <Content Include="Scripts\tablesorter\themes\green\bg.png" />
+    <Content Include="Scripts\tablesorter\themes\green\desc.png" />
+    <Content Include="Scripts\tablesorter\themes\green\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -182,13 +209,52 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\tablesorter\themes\.svn\all-wcprops" />
+    <Content Include="Scripts\tablesorter\themes\.svn\entries" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\all-wcprops" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\entries" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\prop-base\asc.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\prop-base\bg.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\prop-base\blue.zip.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\prop-base\desc.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\prop-base\style.css.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\text-base\asc.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\text-base\bg.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\text-base\blue.zip.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\text-base\desc.gif.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\.svn\text-base\style.css.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\blue\blue.zip" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\all-wcprops" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\entries" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\prop-base\asc.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\prop-base\bg.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\prop-base\desc.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\prop-base\green.zip.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\prop-base\style.css.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\asc.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\bg.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\desc.png.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\green.zip.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\style.css.svn-base" />
+    <Content Include="Scripts\tablesorter\themes\green\green.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\prop-base\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\props\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\text-base\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\tmp\prop-base\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\tmp\props\" />
+    <Folder Include="Scripts\tablesorter\themes\.svn\tmp\text-base\" />
+    <Folder Include="Scripts\tablesorter\themes\blue\.svn\props\" />
+    <Folder Include="Scripts\tablesorter\themes\blue\.svn\tmp\prop-base\" />
+    <Folder Include="Scripts\tablesorter\themes\blue\.svn\tmp\props\" />
+    <Folder Include="Scripts\tablesorter\themes\blue\.svn\tmp\text-base\" />
+    <Folder Include="Scripts\tablesorter\themes\green\.svn\props\" />
+    <Folder Include="Scripts\tablesorter\themes\green\.svn\tmp\prop-base\" />
+    <Folder Include="Scripts\tablesorter\themes\green\.svn\tmp\props\" />
+    <Folder Include="Scripts\tablesorter\themes\green\.svn\tmp\text-base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -202,6 +268,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807220231417_InitialModel.resx">
+      <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
