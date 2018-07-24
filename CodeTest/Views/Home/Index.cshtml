@@ -5,59 +5,96 @@
 }
 
 @section css {
+    <style>
+
+        /*table.tablesorter tbody tr {
+            background-color: none;
+        }*/
+
+    </style>
+
     <link rel="stylesheet" href="@Url.Content("~/Scripts/tablesorter/themes/blue/style.css")" />
+
 }
+
+    <div>
+        <h1>CodeTest</h1>
+
+        <h3>Classes</h3>
+        <table id="ClassList" class="table table-bordered table-hover tablesorter">
+            <thead>
+                <tr>
+                    <th>Class Name</th>
+                    <th>Location</th>
+                    <th>Teacher Name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Classes)
+            {
+                <tr>
+                    <td>@c.ClassName</td>
+                    <td>@c.Location</td>
+                    <td>@c.TeacherName</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+        }
+            </tbody>
+        </table>
+        <h3>Biology</h3>
+        <table id="StudentList" class="table table-bordered table-hover tablesorter">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Age</th>
+                    <th>GPA</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ClassName</td>
+                    <td>Location</td>
+                    <td>TeacherName</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 @section scripts {
     <script type="text/javascript">
 
-           $(document).ready(function () {
+        $("#ClassList > tbody tr").click(function () {
+            var selected = $(this).hasClass("bg-primary");
+            $("#ClassList > tbody tr").removeClass("bg-primary");
+            if (!selected)
+                $(this).addClass("bg-primary");
+        });
 
-               $("#ClassList").tablesorter();
+        $(function () {
+            $('table').tablesorter({
+                //1: {
+                //    // disable it by setting the property sorter to false
+                //    sorter: false
+                //}
 
-           });
-
+                //headers: {
+                //    // disable sorting of the first & second column - before we would have to had made two entries
+                //    // note that "first-name" is a class on the span INSIDE the first column th cell
+                //    '.teacher-name': {
+                //        // disable it by setting the property sorter to false
+                //        sorter: false
+                //    }
+                //}
+            });
+        });
     </script>
-
+    <script src="@Url.Content("~/Scripts/tablesorter/jquery.metadata.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/tablesorter/jquery.tablesorter.min.js")" type="text/javascript"></script>
-
 }
-
-<h1>CodeTest</h1>
-
-<h3>Classes</h3>
-<table id="ClassList" class="table table-bordered table-hover tablesorter">
-    <tr>
-        <th class="header">Class Name</th>
-        <th class="header">Location</th>
-        <th class="header">Teacher Name</th>
-        <th></th>
-        <th></th>
-    </tr>
-    @foreach (var c in Model.Classes)
-    {
-        <tr>
-            <td>@c.ClassName</td>
-            <td>@c.Location</td>
-            <td>@c.TeacherName</td>
-            <td>Edit</td>
-            <td>Delete</td>
-        </tr>
-    }
-
-</table>
-
-
-
-
-<h3>Biology</h3>
-<table id="StudentList" class="table table-bordered table-hover tablesorter">
-    <tr>
-        <th>Student Name</th>
-        <th>Age</th>
-        <th>GPA</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <tr></tr>
-</table>

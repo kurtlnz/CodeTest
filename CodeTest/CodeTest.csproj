@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201807220231417_InitialModel.Designer.cs">
       <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.cs" />
+    <Compile Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.Designer.cs">
+      <DependentUpon>201807240630402_UpdateStudentClassPropertyTypings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\DbContextModel.cs" />
@@ -272,6 +276,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807220231417_InitialModel.resx">
       <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.resx">
+      <DependentUpon>201807240630402_UpdateStudentClassPropertyTypings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
