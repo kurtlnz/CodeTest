@@ -242,6 +242,8 @@
     <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\green.zip.svn-base" />
     <Content Include="Scripts\tablesorter\themes\green\.svn\text-base\style.css.svn-base" />
     <Content Include="Scripts\tablesorter\themes\green\green.zip" />
+    <Content Include="Views\Home\_StudentTable.cshtml" />
+    <Content Include="Views\Home\ClassForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

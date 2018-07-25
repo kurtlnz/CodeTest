@@ -1,0 +1,27 @@
+﻿@model CodeTest.Models.Class
+@{
+    /**/
+
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Class</h2>
+
+@using (Html.BeginForm("SaveClass", "Home"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.ClassName)
+        @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Location)
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TeacherName)
+        @Html.TextBoxFor(m => m.TeacherName, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.ClassId)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

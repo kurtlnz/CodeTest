@@ -38,33 +38,13 @@
                     <td>@c.ClassName</td>
                     <td>@c.Location</td>
                     <td>@c.TeacherName</td>
-                    <td>Edit</td>
+                    <td>@Html.ActionLink("Edit", "EditClass", "Home", new { id = c.ClassId }, null)</td>
                     <td>Delete</td>
                 </tr>
         }
             </tbody>
         </table>
-        <h3>Biology</h3>
-        <table id="StudentList" class="table table-bordered table-hover tablesorter">
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Age</th>
-                    <th>GPA</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ClassName</td>
-                    <td>Location</td>
-                    <td>TeacherName</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
-                </tr>
-            </tbody>
-        </table>
+        @Html.Partial("_StudentTable")
     </div>
 
 @section scripts {
