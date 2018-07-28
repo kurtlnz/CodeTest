@@ -13,5 +13,6 @@ namespace CodeTest.Models
 
         [Display(Name = "Teacher Name")]
         public string TeacherName { get; set; }
+
     }
 }

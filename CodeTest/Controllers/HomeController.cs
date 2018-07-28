@@ -1,5 +1,6 @@
 ﻿using CodeTest.Models;
 using CodeTest.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -43,6 +44,30 @@ namespace CodeTest.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpDelete]
+        public ActionResult DeleteClass(Class @class)
+        {
+            Class classInDb = _context.Classes.FirstOrDefault(c => c.ClassId == @class.ClassId);
+
+            if (classInDb != null)
+            {
+                _context.Classes.Remove(classInDb);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
+
+            if (@class == null)
+                return HttpNotFound();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult EditClass(int id)
         {
             var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
@@ -58,11 +83,24 @@ namespace CodeTest.Controllers
             var viewModel = new IndexViewModel
             {
                 Classes = _context.Classes.ToList(),
-                Students = _context.Students.ToList(),
-                StudentClasses = _context.StudentClasses.ToList()
+                Students = _context.Students.ToList()
             };
 
             return View(viewModel);
+        }
+
+        public ActionResult Index(int id)
+        {
+            var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
+            
+            var viewModel = new IndexViewModel
+            {
+                Classes = _context.Classes.ToList(),
+                Students = _context.Students
+            };
+
+            return View(viewModel);
+            
         }
 
     }

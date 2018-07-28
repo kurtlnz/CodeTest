@@ -39,11 +39,21 @@
                     <td>@c.Location</td>
                     <td>@c.TeacherName</td>
                     <td>@Html.ActionLink("Edit", "EditClass", "Home", new { id = c.ClassId }, null)</td>
-                    <td>Delete</td>
-                </tr>
-        }
+                    <td>
+                        @Ajax.ActionLink("Delete", "Delete", "Home", new { id = c.ClassId },
+                         new AjaxOptions()
+                         {
+                             HttpMethod = "Delete",
+                             Confirm = "Are you sure you want to delete this class?",
+                             OnComplete = "function() { $(this).parent().parent().remove() }"
+                         })
+                </td>
+            </tr>
+    }
             </tbody>
         </table>
+        <button class="btn btn-default">@Html.ActionLink("Add Class", "New", "Home", new { }, null)</button>
+
         @Html.Partial("_StudentTable")
     </div>
 

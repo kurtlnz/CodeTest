@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeTest.Models
@@ -12,5 +13,8 @@ namespace CodeTest.Models
         public string Surname { get; set; }
         public int AgeInYears { get; set; }
         public double GPA { get; set; }
+
+        public IEnumerable<StudentClass> StudentClass { get; set; }
+        //public IEnumerable<Class> Class { get; set; }
     }
 }
