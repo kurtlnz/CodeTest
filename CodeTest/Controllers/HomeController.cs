@@ -97,14 +97,12 @@ namespace CodeTest.Controllers
         {
             var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
             var viewModel = new IndexViewModel();
-
-
+            
             if(@class == null)
             {
                 viewModel = new IndexViewModel
                 {
                     Classes = _context.Classes.ToList(),
-                    //Students = _context.Students.ToList(),
                     StudentClasses = null
                 };
 

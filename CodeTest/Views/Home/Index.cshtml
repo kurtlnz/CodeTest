@@ -58,44 +58,17 @@
 
         <button class="btn btn-default">@Html.ActionLink("Test", "Index", "Home", new { id = 1 }, null)</button>
 
-
-@if(Model.StudentClasses != null)
-{
-        <h3>@Model.Class.ClassName</h3>
-        <table id="StudentList" class="table table-bordered table-hover tablesorter">
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Age</th>
-                    <th>GPA</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var sc in Model.StudentClasses)
-                {
-                <tr>
-                    <td>@sc.Student.GivenName @sc.Student.Surname</td>
-                    <td>@sc.Student.AgeInYears</td>
-                    <td>@sc.Student.GPA</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
-                </tr>
-                }
-            </tbody>
-        </table>
-}
-
-
-
-
-
-        @*@Html.Partial("_StudentTable")*@
+        @Html.Partial("_StudentTable", Model)
     </div>
 
 @section scripts {
     <script type="text/javascript">
+
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
 
         $("#ClassList > tbody tr").click(function () {
             var selected = $(this).hasClass("bg-primary");
