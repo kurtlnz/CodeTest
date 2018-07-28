@@ -9,7 +9,7 @@ namespace CodeTest.Models
         public DbSet<StudentClass> StudentClasses { get; set; }
 
         public DbContextModel()
-                : base("CodeTest")
+                : base("CodeTestV2")
         {
         }
 

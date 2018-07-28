@@ -156,9 +156,9 @@
     <Compile Include="Migrations\201807220231417_InitialModel.Designer.cs">
       <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.cs" />
-    <Compile Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.Designer.cs">
-      <DependentUpon>201807240630402_UpdateStudentClassPropertyTypings.cs</DependentUpon>
+    <Compile Include="Migrations\201807280219503_UpdateModelNavigationProperties.cs" />
+    <Compile Include="Migrations\201807280219503_UpdateModelNavigationProperties.Designer.cs">
+      <DependentUpon>201807280219503_UpdateModelNavigationProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
@@ -279,8 +279,8 @@
     <EmbeddedResource Include="Migrations\201807220231417_InitialModel.resx">
       <DependentUpon>201807220231417_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807240630402_UpdateStudentClassPropertyTypings.resx">
-      <DependentUpon>201807240630402_UpdateStudentClassPropertyTypings.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807280219503_UpdateModelNavigationProperties.resx">
+      <DependentUpon>201807280219503_UpdateModelNavigationProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

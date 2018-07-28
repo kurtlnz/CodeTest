@@ -1,25 +1,28 @@
 ﻿@model CodeTest.ViewModels.IndexViewModel
-<h3>Biology</h3>
-<table id="StudentList" class="table table-bordered table-hover tablesorter">
-    <thead>
-        <tr>
-            <th>Student Name</th>
-            <th>Age</th>
-            <th>GPA</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var stu in Model.Students)
-        {
-        <tr>
-            <td>@stu.GivenName @stu.Surname</td>
-            <td>@stu.AgeInYears</td>
-            <td>@stu.GPA</td>
-            <td>Edit</td>
-            <td>Delete</td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (Model.StudentClasses != null)
+{
+    <h3>@Model.Class.ClassName</h3>
+    <table id="StudentList" class="table table-bordered table-hover tablesorter">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Age</th>
+                <th>GPA</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sc in Model.StudentClasses)
+            {
+                <tr>
+                    <td>@sc.Student.GivenName @sc.Student.Surname</td>
+                    <td>@sc.Student.AgeInYears</td>
+                    <td>@sc.Student.GPA</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

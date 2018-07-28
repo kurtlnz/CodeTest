@@ -7,13 +7,13 @@ namespace CodeTest.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UpdateStudentClassPropertyTypings : IMigrationMetadata
+    public sealed partial class UpdateModelNavigationProperties : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateStudentClassPropertyTypings));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateModelNavigationProperties));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807240630402_UpdateStudentClassPropertyTypings"; }
+            get { return "201807280219503_UpdateModelNavigationProperties"; }
         }
         
         string IMigrationMetadata.Source

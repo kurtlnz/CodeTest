@@ -6,7 +6,7 @@ namespace CodeTest.Models
 {
     public class Student
     {
-        public int StudentId { get; set; }
+        public int StudentId { get; set; } 
         public string GivenName { get; set; }
         [Index("SurnameIndex", IsUnique = true)]
         [MaxLength(255)]
@@ -14,7 +14,6 @@ namespace CodeTest.Models
         public int AgeInYears { get; set; }
         public double GPA { get; set; }
 
-        public IEnumerable<StudentClass> StudentClass { get; set; }
-        //public IEnumerable<Class> Class { get; set; }
+        public virtual ICollection<StudentClass> StudentClass { get; set; }
     }
 }

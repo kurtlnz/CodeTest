@@ -1,7 +1,11 @@
 ﻿using CodeTest.Models;
 using CodeTest.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace CodeTest.Controllers
@@ -78,28 +82,47 @@ namespace CodeTest.Controllers
             return View("ClassForm", @class);
         }
 
-        public ActionResult Index()
-        {
-            var viewModel = new IndexViewModel
-            {
-                Classes = _context.Classes.ToList(),
-                Students = _context.Students.ToList()
-            };
+        //public ActionResult Index()
+        //{
+        //    var viewModel = new IndexViewModel
+        //    {
+        //        Classes = _context.Classes.ToList(),
+        //        Students = _context.Students.ToList()
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
             var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
-            
-            var viewModel = new IndexViewModel
-            {
-                Classes = _context.Classes.ToList(),
-                Students = _context.Students
-            };
+            var viewModel = new IndexViewModel();
 
-            return View(viewModel);
+
+            if(@class == null)
+            {
+                viewModel = new IndexViewModel
+                {
+                    Classes = _context.Classes.ToList(),
+                    //Students = _context.Students.ToList(),
+                    StudentClasses = null
+                };
+
+                return View(viewModel);
+            }
+            else
+            {
+                var studentClasses = _context.StudentClasses.Include(s => s.Student).Where(c => c.ClassId == id).ToList();
+
+                viewModel = new IndexViewModel
+                {
+                    Class = @class,
+                    Classes = _context.Classes.ToList(),
+                    StudentClasses = studentClasses
+                };
+
+                return View(viewModel);
+            }
             
         }
 
