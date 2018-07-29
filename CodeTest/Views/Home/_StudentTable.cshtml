@@ -19,10 +19,11 @@
                     <td>@sc.Student.GivenName @sc.Student.Surname</td>
                     <td>@sc.Student.AgeInYears</td>
                     <td>@sc.Student.GPA</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <td>@Html.ActionLink("Edit", "EditStudent", "Home", new { id = sc.StudentId }, null)</td>
+                    <td>@Html.ActionLink("Delete", "DeleteStudent", "Home", new { id = sc.StudentId }, null)</td>
                 </tr>
             }
         </tbody>
     </table>
+    <button class="btn btn-default">@Html.ActionLink("Add Student", "NewStudent", "Home", new { classId = @Model.Class.ClassId }, null)</button>
 }

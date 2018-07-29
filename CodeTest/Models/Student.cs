@@ -11,6 +11,7 @@ namespace CodeTest.Models
         [Index("SurnameIndex", IsUnique = true)]
         [MaxLength(255)]
         public string Surname { get; set; }
+        [Display(Name = "Age")]
         public int AgeInYears { get; set; }
         public double GPA { get; set; }
 

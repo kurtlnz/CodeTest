@@ -1,0 +1,36 @@
+﻿@model CodeTest.ViewModels.StudentFormViewModel
+@{
+    /**/
+
+    ViewBag.Title = "NewStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Student</h2>
+
+@using (Html.BeginForm("SaveStudent", "Home"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Student.GivenName)
+        @Html.TextBoxFor(m => m.Student.GivenName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Student.Surname)
+        @Html.TextBoxFor(m => m.Student.Surname, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Student.AgeInYears)
+        @Html.TextBoxFor(m => m.Student.AgeInYears, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Student.GPA)
+        @Html.TextBoxFor(m => m.Student.GPA, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Student.StudentId)
+
+    @Html.HiddenFor(m => m.Class.ClassId)
+    @Html.HiddenFor(m => m.Class.ClassName)
+    @Html.HiddenFor(m => m.Class.Location)
+    @Html.HiddenFor(m => m.Class.TeacherName)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
