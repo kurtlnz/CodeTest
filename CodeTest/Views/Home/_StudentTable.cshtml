@@ -2,28 +2,29 @@
 @if (Model.StudentClasses != null)
 {
     <h3>@Model.Class.ClassName</h3>
-    <table id="StudentList" class="table table-bordered table-hover tablesorter">
+    <table id="StudentList" class="datatable table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th>Student Name</th>
-                <th>Age</th>
-                <th>GPA</th>
-                <th></th>
-                <th></th>
+                <th class="col-md-2">Student Name</th>
+                <th class="col-md-2">Age</th>
+                <th class="col-md-2">GPA</th>
+                <th class="col-md-1"></th>
+                <th class="col-md-1"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var sc in Model.StudentClasses)
             {
                 <tr>
-                    <td>@sc.Student.GivenName @sc.Student.Surname</td>
-                    <td>@sc.Student.AgeInYears</td>
-                    <td>@sc.Student.GPA</td>
-                    <td>@Html.ActionLink("Edit", "EditStudent", "Home", new { id = sc.StudentId }, null)</td>
-                    <td>@Html.ActionLink("Delete", "DeleteStudent", "Home", new { id = sc.StudentId }, null)</td>
+                    <td class="col-md-2">@sc.Student.GivenName @sc.Student.Surname</td>
+                    <td class="col-md-2">@sc.Student.AgeInYears</td>
+                    <td class="col-md-2">@sc.Student.GPA</td>
+                    <td class="col-md-1">@Html.ActionLink("Edit", "EditStudent", "Home", new { id = sc.StudentId }, null)</td>
+                    <td class="col-md-1">@Html.ActionLink("Delete", "DeleteStudent", "Home", new { id = sc.StudentId }, null)</td>
                 </tr>
             }
         </tbody>
     </table>
+    <br>
     <button class="btn btn-default">@Html.ActionLink("Add Student", "NewStudent", "Home", new { classId = @Model.Class.ClassId }, null)</button>
 }
