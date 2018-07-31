@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace CodeTest.Controllers
 {
@@ -89,9 +92,23 @@ namespace CodeTest.Controllers
                 studentInDb.GPA = student.GPA;
             }
 
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.GetBaseException().Message;
 
-            return RedirectToAction("Index", "Home", @class.ClassId);
+                if (error.Contains("Cannot insert duplicate key row in object 'dbo.Students' with unique index 'SurnameIndex'"))
+                    return View("ErrorDuplicateKey");
+
+                throw;
+            }
+
+            var displayClass = @class;
+
+            return RedirectToAction("Index", "Home", new { id = displayClass.ClassId });
         }
 
         // GET
@@ -132,7 +149,7 @@ namespace CodeTest.Controllers
 
             var displayClass = _context.Classes.SingleOrDefault(c => c.ClassId == studentClassInDb.ClassId);
 
-            return RedirectToAction("Index", "Home", displayClass.ClassId);
+            return RedirectToAction("Index", "Home", new { id = displayClass.ClassId });
         }
 
         #endregion
@@ -221,17 +238,6 @@ namespace CodeTest.Controllers
         #endregion
 
         #region Index
-
-        //public ActionResult Index()
-        //{
-        //    var viewModel = new IndexViewModel
-        //    {
-        //        Classes = _context.Classes.ToList(),
-        //        Students = _context.Students.ToList()
-        //    };
-
-        //    return View(viewModel);
-        //}
 
         public ActionResult Index(int? id)
         {
