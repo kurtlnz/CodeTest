@@ -148,7 +148,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,10 +209,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_StudentTable.cshtml" />
-    <Content Include="Views\Home\ClassForm.cshtml" />
-    <Content Include="Views\Home\StudentForm.cshtml" />
-    <Content Include="Views\Home\DeleteForm.cshtml" />
+    <Content Include="Views\Class\ClassForm.cshtml" />
+    <Content Include="Views\Student\StudentForm.cshtml" />
     <Content Include="Views\Shared\ErrorDuplicateKey.cshtml" />
+    <Content Include="Views\Class\DeleteForm.cshtml" />
+    <Content Include="Views\Student\DeleteForm.cshtml" />
+    <Content Include="Views\Home\_ClassForm.cshtml" />
+    <Content Include="Views\Home\_StudentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,16 +5,14 @@
 }
 
 @section css {
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
 }
 
-    <div>
+    <div class="container">
         <h1>CodeTest</h1>
 
         <h3>Classes</h3>
-        <table id="ClassList" class="datatable table table-striped table-bordered table-hover">
+        <table id="ClassList" class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
                     <th class="col-md-2">Class Name</th>
@@ -27,20 +25,59 @@
             <tbody>
                 @foreach (var c in Model.Classes)
                 {
-                <tr class="clickable-row" data-classid="@c.ClassId">
-                    <td class="col-md-2">@c.ClassName</td>
-                    <td class="col-md-2">@c.Location</td>
-                    <td class="col-md-2">@c.TeacherName</td>
-                    <td class="col-md-1">@Html.ActionLink("Edit", "EditClass", "Home", new { id = c.ClassId }, null)</td>
-                    <td class="col-md-1">@Html.ActionLink("Delete", "DeleteClass", "Home", new { id = c.ClassId }, null)</td>
-                </tr>
+                    <tr class="clickable-row" data-classid="@c.ClassId">
+                        <td class="col-md-2">@c.ClassName</td>
+                        <td class="col-md-2">@c.Location</td>
+                        <td class="col-md-2">@c.TeacherName</td>
+                        <td class="col-md-1">@Html.ActionLink("Edit", "EditClass", "Class", new { id = c.ClassId }, null)</td>
+                        <td class="col-md-1">@Html.ActionLink("Delete", "DeleteClass", "Class", new { id = c.ClassId }, null)</td>
+                    </tr>
                 }
             </tbody>
         </table>
         <br>
-        <button class="btn btn-default">@Html.ActionLink("Add Class", "NewClass", "Home", new { }, null)</button>
+        @*<button class="btn btn-default">@Html.ActionLink("Add Class", "NewClass", "Class", new { }, null)</button>*@
+
+        <button class="btn btn-primary" data-target="#ClassForm" data-toggle="modal">Add Class</button>
 
         @Html.Partial("_StudentTable", Model)
+
+    </div>
+
+    @*// Class Modal*@
+    <div class="modal fade" id="ClassForm" tabindex="-1" role="dialog" aria-labelledby="ClassFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>New Class</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div id="formContent">
+                        @Html.Partial("_ClassForm", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*// Student Modal*@
+    <div class="modal fade" id="StudentForm" tabindex="-1" role="dialog" aria-labelledby="StudentFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>New Student</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div id="formContent">
+                        @Html.Partial("_StudentForm", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 @section scripts {
@@ -57,7 +94,14 @@
 
         // Make tables DataTables
         $(document).ready(function () {
-            $('.datatable').DataTable({
+            $('#ClassList').DataTable({
+                "searching": false,
+                "paging": false
+            });
+        });
+
+        $(document).ready(function () {
+            $('#StudentList').DataTable({
                 "searching": false,
                 "paging": false
             });
@@ -86,5 +130,4 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     
-
 }

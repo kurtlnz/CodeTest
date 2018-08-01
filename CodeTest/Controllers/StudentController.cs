@@ -1,19 +1,17 @@
 ﻿using CodeTest.Models;
 using CodeTest.ViewModels;
 using System;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
 namespace CodeTest.Controllers
 {
-    public class HomeController : Controller
+    public class StudentController : Controller
     {
         private DbContextModel _context;
 
-        public HomeController()
+        public StudentController()
         {
             _context = new DbContextModel();
         }
@@ -22,8 +20,6 @@ namespace CodeTest.Controllers
         {
             _context.Dispose();
         }
-
-        #region Student
 
         public ActionResult NewStudent(int? classId)
         {
@@ -52,7 +48,7 @@ namespace CodeTest.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var student = _context.Students.SingleOrDefault(s => s.StudentId == id);
 
             if (student == null)
@@ -72,7 +68,7 @@ namespace CodeTest.Controllers
             var student = viewModel.Student;
             var @class = viewModel.Class;
             var studentClass = new StudentClass { ClassId = @class.ClassId, StudentId = student.StudentId };
-            
+
             if (student.StudentId == 0)
             {
                 _context.Students.Add(student);
@@ -147,127 +143,5 @@ namespace CodeTest.Controllers
 
             return RedirectToAction("Index", "Home", new { id = displayClass.ClassId });
         }
-
-        #endregion
-
-        #region Class
-
-        public ActionResult NewClass()
-        {
-            return View("ClassForm");
-        }
-
-        // GET
-        public ActionResult EditClass(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
-
-            if (@class == null)
-                return HttpNotFound();
-
-            return View("ClassForm", @class);
-        }
-
-        [HttpPost]
-        public ActionResult SaveClass(Class @class)
-        {
-            if (@class.ClassId == 0)
-                _context.Classes.Add(@class);
-            else
-            {
-                var classInDb = _context.Classes.Single(c => c.ClassId == @class.ClassId);
-
-                classInDb.ClassName = @class.ClassName;
-                classInDb.Location = @class.Location;
-                classInDb.TeacherName = @class.TeacherName;
-            }
-            
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "Home", @class.ClassId);
-        }
-
-        // GET
-        public ActionResult DeleteClass(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
-
-            if (@class == null)
-                return HttpNotFound();
-
-            var viewModel = new DeleteFormViewModel
-            {
-                Class = @class
-            };
-
-            return View("DeleteForm", viewModel);
-        }
-        
-        [HttpPost]
-        public ActionResult DeleteClassConfirm(Class @class)
-        {
-            var classInDb = _context.Classes.SingleOrDefault(c => c.ClassId == @class.ClassId);
-            var studentClassesInDb = _context.StudentClasses.Include(s => s.Student).Where(sc => sc.ClassId == @class.ClassId).ToList();
-            var studentsInDb = studentClassesInDb.Select(s => s.Student).ToList();
-            
-            if (classInDb != null)
-            {
-                _context.Classes.Remove(classInDb);
-                _context.Students.RemoveRange(studentsInDb);
-                _context.StudentClasses.RemoveRange(studentClassesInDb);
-                _context.SaveChanges();
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        #endregion
-
-        #region Index
-
-        public ActionResult Index(int? id)
-        {
-            var @class = _context.Classes.SingleOrDefault(c => c.ClassId == id);
-            var viewModel = new IndexViewModel();
-            
-            if(@class == null)
-            {
-                viewModel = new IndexViewModel
-                {
-                    Classes = _context.Classes.ToList(),
-                    StudentClasses = null
-                };
-
-                return View(viewModel);
-            }
-            else
-            {
-                var studentClasses = _context.StudentClasses.Include(s => s.Student).Where(c => c.ClassId == id).ToList();
-
-                viewModel = new IndexViewModel
-                {
-                    Class = @class,
-                    Classes = _context.Classes.ToList(),
-                    StudentClasses = studentClasses
-                };
-
-                return View(viewModel);
-            }
-            
-        }
-
-        #endregion
-
     }
-
 }

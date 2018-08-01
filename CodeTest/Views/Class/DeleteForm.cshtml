@@ -1,0 +1,19 @@
+﻿@model CodeTest.ViewModels.DeleteFormViewModel
+@{
+    ViewBag.Title = "DeleteForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Class != null)
+{
+    <p>Deleting this class will also delete all associated students. Do you wish to continue?</p>
+
+    using (Html.BeginForm("DeleteClassConfirm", "Class"))
+    {
+        @Html.HiddenFor(m => m.Class.ClassId)
+        @Html.HiddenFor(m => m.Class.ClassName)
+        @Html.HiddenFor(m => m.Class.Location)
+        @Html.HiddenFor(m => m.Class.TeacherName)
+        <button type="submit" class="btn btn-default">Delete</button>
+    }
+}
