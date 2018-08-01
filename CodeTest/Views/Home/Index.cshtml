@@ -50,7 +50,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3>New Class</h3>
+                    <h3 class="modal-title">New Class</h3>
                 </div>
 
                 <div class="modal-body">
@@ -83,45 +83,46 @@
 @section scripts {
     <script type="text/javascript">
 
-        // Show Student table based on Class row clicked
         $(document).ready(function ($) {
+            
+            // Show Student table based on Class row clicked
             $(".clickable-row").click(function () {
                 var classId = $(this).data("classid");
                 var url = '/Home/Index/' + classId
                 window.location.href = url
             });
-        });
 
-        // Make tables DataTables
-        $(document).ready(function () {
+
+            // Make tables DataTables
             $('#ClassList').DataTable({
                 "searching": false,
                 "paging": false
             });
-        });
 
-        $(document).ready(function () {
             $('#StudentList').DataTable({
                 "searching": false,
                 "paging": false
             });
-        });
 
-        // Highlight Student with GPA over 3.2
-        $('#StudentList tr').each(function () {
-            var gpa = $(this).find("td").eq(2).text();
 
-            if (gpa >= 3.2) {
-                $(this).find("td").eq(0).css('color', 'blue');
-            }
-        });
+            // Highlight Student with GPA over 3.2
+            $('#StudentList tr').each(function () {
+                var gpa = $(this).find("td").eq(2).text();
 
-        // Highlight class row clicked
-        $("#ClassList > tbody tr").click(function () {
-            var selected = $(this).hasClass("info");
-            $("#ClassList > tbody tr").removeClass("info");
-            if (!selected)
-                $(this).addClass("info");
+                if (gpa >= 3.2) {
+                    $(this).find("td").eq(0).css('color', 'blue');
+                }
+            });
+
+
+            // Highlight class row clicked
+            $("#ClassList > tbody tr").click(function () {
+                var selected = $(this).hasClass("info");
+                $("#ClassList > tbody tr").removeClass("info");
+                if (!selected)
+                    $(this).addClass("info");
+            });
+
         });
         
     </script>
