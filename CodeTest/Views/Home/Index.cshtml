@@ -7,7 +7,6 @@
 @section css {
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 }
-
     <div class="container">
         <h1>CodeTest</h1>
 
@@ -36,48 +35,10 @@
             </tbody>
         </table>
         <br>
-        @*<button class="btn btn-default">@Html.ActionLink("Add Class", "NewClass", "Class", new { }, null)</button>*@
-
-        <button class="btn btn-primary" data-target="#ClassForm" data-toggle="modal">Add Class</button>
+        <button class="btn btn-default">@Html.ActionLink("Add Class", "NewClass", "Class", new { }, null)</button>
 
         @Html.Partial("_StudentTable", Model)
 
-    </div>
-
-    @*// Class Modal*@
-    <div class="modal fade" id="ClassForm" tabindex="-1" role="dialog" aria-labelledby="ClassFormModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">New Class</h3>
-                </div>
-
-                <div class="modal-body">
-                    <div id="formContent">
-                        @Html.Partial("_ClassForm", Model)
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @*// Student Modal*@
-    <div class="modal fade" id="StudentForm" tabindex="-1" role="dialog" aria-labelledby="StudentFormModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3>New Student</h3>
-                </div>
-
-                <div class="modal-body">
-                    <div id="formContent">
-                        @Html.Partial("_StudentForm", Model)
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 @section scripts {
@@ -92,7 +53,6 @@
                 window.location.href = url
             });
 
-
             // Make tables DataTables
             $('#ClassList').DataTable({
                 "searching": false,
@@ -103,8 +63,7 @@
                 "searching": false,
                 "paging": false
             });
-
-
+            
             // Highlight Student with GPA over 3.2
             $('#StudentList tr').each(function () {
                 var gpa = $(this).find("td").eq(2).text();
@@ -113,8 +72,7 @@
                     $(this).find("td").eq(0).css('color', 'blue');
                 }
             });
-
-
+            
             // Highlight class row clicked
             $("#ClassList > tbody tr").click(function () {
                 var selected = $(this).hasClass("info");
@@ -127,7 +85,6 @@
         
     </script>
 
-    @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>*@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     

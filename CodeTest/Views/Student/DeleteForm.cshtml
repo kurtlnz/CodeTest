@@ -1,21 +1,36 @@
 ﻿@model CodeTest.ViewModels.DeleteFormViewModel
 @{
-    ViewBag.Title = "DeleteForm";
+    ViewBag.Title = "Delete Student";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @if (Model.Student != null)
 {
-    <p>Delete this student?</p>
+    <h2>Delete Student</h2>
 
     using (Html.BeginForm("DeleteStudentConfirm", "Student"))
     {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Student.GivenName)
+            @Html.TextBoxFor(m => m.Student.GivenName, new { @class = "form-control", @readonly = true })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Student.Surname)
+            @Html.TextBoxFor(m => m.Student.Surname, new { @class = "form-control", @readonly = true })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Student.AgeInYears)
+            @Html.TextBoxFor(m => m.Student.AgeInYears, new { @class = "form-control", @readonly = true })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Student.GPA)
+            @Html.TextBoxFor(m => m.Student.GPA, new { @class = "form-control", @readonly = true })
+        </div>
         @Html.HiddenFor(m => m.Student.StudentId)
-        @Html.HiddenFor(m => m.Student.GivenName)
-        @Html.HiddenFor(m => m.Student.Surname)
-        @Html.HiddenFor(m => m.Student.AgeInYears)
-        @Html.HiddenFor(m => m.Student.GPA)
-        <button type="submit" class="btn btn-default">Delete</button>
+        <strong>Delete this student?</strong>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-primary">Delete</button>
     }
 }
 

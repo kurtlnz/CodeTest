@@ -214,8 +214,6 @@
     <Content Include="Views\Shared\ErrorDuplicateKey.cshtml" />
     <Content Include="Views\Class\DeleteForm.cshtml" />
     <Content Include="Views\Student\DeleteForm.cshtml" />
-    <Content Include="Views\Home\_ClassForm.cshtml" />
-    <Content Include="Views\Home\_StudentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
