@@ -60,7 +60,9 @@ namespace CodeTest.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home", @class.ClassId);
+            var displayClass = @class;
+
+            return RedirectToAction("Index", "Home", new { id = displayClass.ClassId });
         }
 
         // GET

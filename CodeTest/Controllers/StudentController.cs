@@ -42,21 +42,24 @@ namespace CodeTest.Controllers
         }
 
         // GET
-        public ActionResult EditStudent(int? id)
+        public ActionResult EditStudent(int? studentId, int? classId)
         {
-            if (id == null)
+            if (studentId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var student = _context.Students.SingleOrDefault(s => s.StudentId == id);
+            var student = _context.Students.SingleOrDefault(s => s.StudentId == studentId);
 
             if (student == null)
                 return HttpNotFound();
 
+            var displayClass = _context.Classes.SingleOrDefault(c => c.ClassId == classId);
+
             var viewModel = new StudentFormViewModel
             {
-                Student = student
+                Student = student,
+                Class = displayClass
             };
 
             return View("StudentForm", viewModel);

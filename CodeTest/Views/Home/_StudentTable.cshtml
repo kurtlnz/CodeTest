@@ -19,7 +19,7 @@
                     <td class="col-md-2">@sc.Student.GivenName @sc.Student.Surname</td>
                     <td class="col-md-2">@sc.Student.AgeInYears</td>
                     <td class="col-md-2">@sc.Student.GPA</td>
-                    <td class="col-md-1">@Html.ActionLink("Edit", "EditStudent", "Student", new { id = sc.StudentId }, null)</td>
+                    <td class="col-md-1">@Html.ActionLink("Edit", "EditStudent", "Student", new { studentId = sc.StudentId, classId = sc.ClassId }, null)</td>
                     <td class="col-md-1">@Html.ActionLink("Delete", "DeleteStudent", "Student", new { id = sc.StudentId }, null)</td>
                 </tr>
             }
