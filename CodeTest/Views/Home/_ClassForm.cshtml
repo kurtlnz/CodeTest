@@ -1,6 +1,6 @@
 ﻿@model CodeTest.ViewModels.IndexViewModel
 
-@using (Html.BeginForm("SaveClass", "Class"))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "classForm" }))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Class.ClassName)

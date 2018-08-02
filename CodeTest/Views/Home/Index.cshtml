@@ -38,14 +38,14 @@
         <br>
         @*<button class="btn btn-default">@Html.ActionLink("Add Class", "NewClass", "Class", new { }, null)</button>*@
 
-        <button class="btn btn-primary" data-target="#ClassForm" data-toggle="modal">Add Class</button>
+        <button class="btn btn-primary" data-target="#ClassFormModal" data-toggle="modal">Add Class</button>
 
         @Html.Partial("_StudentTable", Model)
 
     </div>
 
     @*// Class Modal*@
-    <div class="modal fade" id="ClassForm" tabindex="-1" role="dialog" aria-labelledby="ClassFormModalLabel">
+    <div class="modal fade" id="ClassFormModal" tabindex="-1" role="dialog" aria-labelledby="ClassFormModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,7 +63,7 @@
     </div>
 
     @*// Student Modal*@
-    <div class="modal fade" id="StudentForm" tabindex="-1" role="dialog" aria-labelledby="StudentFormModalLabel">
+    <div class="modal fade" id="StudentFormModal" tabindex="-1" role="dialog" aria-labelledby="StudentFormModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -84,7 +84,23 @@
     <script type="text/javascript">
 
         $(document).ready(function ($) {
-            
+
+            // 
+            $form = $("#classForm");
+
+            $form.on("submit", function (e) {
+                e.preventDefault();
+                var formData = $form.serializeArray();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Class/SaveClass',
+                    data: formData
+                }).done(function () {
+                    $("#ClassFormModal").modal("hide");
+                });
+            });
+
+
             // Show Student table based on Class row clicked
             $(".clickable-row").click(function () {
                 var classId = $(this).data("classid");
